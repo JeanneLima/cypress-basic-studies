@@ -31,8 +31,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('deve manter o campo de telefone vazio quando digitado valor não-numérico no mesmo', () => {
     cy.get('#phone')
-    .type('abc@')
-    .should('have.value', '')
+      .type('abc@')
+      .should('have.value', '')
   })
 
   it('deve exibir mensagem de erro quando o telefone se torna obrigatório, mas não é preenchido antes do envio do formulário', () => {
@@ -43,5 +43,36 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#open-text-area').type('Teste')
     cy.get('.button[type="submit"]').click()
     cy.get('.error').should('be.visible')
+  })
+
+  it('deve preencher e limpar os campos "Nome", "Sobrenome", "E-mail" e "Telefone" conforme digitação', () => {
+    const firstName = 'Fulano';
+    const lastName = 'Silva';
+    const email = 'fulano.silva@gmail.com';
+    const phone = '00000000';
+
+    cy.get('#firstName')
+      .type(firstName)
+      .should('have.value', firstName)
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#lastName')
+      .type(lastName)
+      .should('have.value', lastName)
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#email')
+      .type(email)
+      .should('have.value', email)
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#phone')
+      .type(phone)
+      .should('have.value', phone)
+      .clear()
+      .should('have.value', '')
   })
 })
