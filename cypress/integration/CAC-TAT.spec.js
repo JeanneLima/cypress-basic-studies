@@ -9,7 +9,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
   })
 
-  it('deve preencher os campos obrigatórios e enviar o formulário', () => {
+  it('deve exibir mensagem de sucesso quando enviado o formulário com os campos obrigatórios preenchidos', () => {
     const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
     cy.get('#firstName').type('Fulano')
@@ -79,5 +79,10 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   it('deve exibir mensagem de erro quando submeter o formulário sem preencher os campos obrigatórios', () => {
     cy.get('.button[type="submit"]').click()
     cy.get('.error').should('be.visible')
+  })
+
+  it('deve enviar o formulário com sucesso usando um comando customizado', () => {
+    cy.fillMandatoryFieldsAndSubmit('Ciclano')
+    cy.get('.success').should('be.visible')
   })
 })
